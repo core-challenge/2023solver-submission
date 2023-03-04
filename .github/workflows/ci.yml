@@ -25,10 +25,10 @@ jobs:
         with:
           file: container/Dockerfile
           push: false
-          tags: ${{ github.action_repository }}:latest
+          tags: ${{ github.repository }}:latest
       - name: Test container with simple dataset
         run: |
-          docker run --rm -t ${{ github.action_repository }}:latest input.col input.dat
+          docker run --rm -t ${{ github.repository }}:latest input.col input.dat
 
   test-description:
     runs-on: ubuntu-latest
