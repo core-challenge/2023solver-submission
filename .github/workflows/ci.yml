@@ -37,5 +37,12 @@ jobs:
     
     steps:
       - uses: actions/checkout@v3
-      # setup latex env
-      # run pdflatex
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          working_directory: description
+          root_file: main.tex
+      - uses: actions/upload-artifact@v3
+        with:
+          name: Description
+          path: description/main.pdf
