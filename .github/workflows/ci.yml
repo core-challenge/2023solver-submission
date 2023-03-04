@@ -26,6 +26,7 @@ jobs:
         with:
           context: ./container/
           file: container/Dockerfile
+          load: true
           push: false
           tags: ${{ github.repository }}:latest
       - run: docker image ls
