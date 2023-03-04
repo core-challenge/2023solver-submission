@@ -16,11 +16,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-
-      - name: Run a one-line script
-        run: echo Hello, world!
-      # build container
-      # run container with simple dataset
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+      - name: Build docker container
+          uses: docker/build-push-action@v4
+        with:
+          push: false
+          tags: ${{ github.action_repository }}:latest
+      - name: Test container with simple dataset
+        run: |
+          docker run --rm -t ${{ github.action_repository }}:latest input.col input.dat
 
   test-description:
     runs-on: ubuntu-latest
