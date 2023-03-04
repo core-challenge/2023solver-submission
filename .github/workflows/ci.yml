@@ -23,6 +23,7 @@ jobs:
       - name: Build docker container
           uses: docker/build-push-action@v4
         with:
+          file: container/Dockerfile
           push: false
           tags: ${{ github.action_repository }}:latest
       - name: Test container with simple dataset
