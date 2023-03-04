@@ -1,0 +1,5 @@
+/description/*.aux
+/description/*.fls
+/description/*.log
+/description/*.fdb_latexmk
+/description/*.pdf
