@@ -2,27 +2,35 @@
 
 ## Solver track
 
-- (Preperation) please do the followings:
+### ToDo before Submission
+
   1. Develop your solver
      - (Check) your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
-	 - (Check) your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
-  2. Clone this repository [2023solver-submittion]() to 
-  3. Create a solver executable on ubuntu 20.04 (as Docker container)
-     - (Check) In your container, the following command returns appropriate output?
+	   - (Check) your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
+  2. Clone this repository [2023solver-submission](https://github.com/core-challenge/2023solver-submission) and edit it as your private repository. 
+  3. Create a solver executable on ubuntu 20.04 (as a Docker container)
+     - (Check) In your container, the following command returns the appropriate output.
 	 ```bash
 	 /2023solver/run.sh /2023solver/example/hc-toyno-01.col /2023solver/example/hc-toyno-01_01.dat
 	 /2023solver/run.sh /2023solver/example/hc-toyyes-01.col /2023solver/example/hc-toyyes-01_01.dat
 	 ```
   4. Write your solver description. 
-  5. Appropriately place i) your container archive and ii) your solver description into the your provate repository cloned from this repository [2023solver-submittion](). 
+  5. Appropriately place i) your container archive and ii) your solver description into the your provate repository cloned from this repository. 
     - (Check) "Github action" will run everytime you push. Please check your action stateus to check whether your products are applopriately placed or not. 
 
-- (Submission) please do the followings:
-  1. please fill and submit [this Google Form]().
+### Check List before Submission
+
+- [ ] your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
+- [ ] your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
+- [ ] In your container, does the following command returns the appropriate output?
+- [ ] Are "Github action" status all green?
+
+### ToDo at the Submission
+
+  1. please fill in and send your information through [this Google](https://forms.gle/CGYfrksJASwGUpWYA) Form](https://forms.gle/CGYfrksJASwGUpWYA).
   2. submit your products as a private Github repository which contains
-    - docker container archive
-      - (Note) if your archive file exceeds 100MB (Github limit) then please contact us. We will let you know another link for uploading. 
-	- solver description
+    - a Docker file
+    - a solver description
   3. Add TakehideSoh and tom-tan as members of your private repository. 
 
 
