@@ -46,7 +46,7 @@ jobs:
         run: |
           ${{ github.workspace }}/.github/workflows/run-tests.sh $TIMEOUT ${{ github.repository }}:latest .env ${{ github.workspace }}/container/test-instances results
             ; code=$?
-          cat results/ressult.md >> $GITHUB_STEP_SUMMARY
+          cat results/result.md >> $GITHUB_STEP_SUMMARY
           exit $code
         env:
           TIMEOUT: 30
