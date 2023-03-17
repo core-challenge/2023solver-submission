@@ -28,7 +28,7 @@ jobs:
           load: true
           push: false
           tags: ${{ github.repository }}:latest
-      - name: Set environment variable for your solver
+      - name: Set environment variables for your solver
         run: |
           echo JAVA_OPTS="-Xms${MEM_LIMIT_GB}g -Xmx${MEM_LIMIT_GB}g" > .env
         env:
