@@ -4,7 +4,7 @@
 
   1. Develop your solver
      - (Check) your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
-	   - (Check) your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
+     - (Check) your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
   2. Clone this repository [2023solver-submission](https://github.com/core-challenge/2023solver-submission) and edit it as your private repository. 
   3. Create a solver executable on ubuntu 20.04 as a Dockerfile.
   4. Write your solver description. 
@@ -67,7 +67,7 @@ RUN \
 
 ## ToDo at the Submission
 
-  1. please fill in and send your information through [this Google](https://forms.gle/CGYfrksJASwGUpWYA) Form](https://forms.gle/CGYfrksJASwGUpWYA).
+  1. please fill in and send your information through [this Google form](https://forms.gle/CGYfrksJASwGUpWYA).
   2. submit your products as a private Github repository which contains
     - a Docker file
     - a solver description
