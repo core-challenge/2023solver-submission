@@ -13,7 +13,7 @@ RUN git clone --depth 1 https://github.com/core-challenge/util-example-solver.gi
 
 # Set environment variables if needed
 ENV PATH $PATH:/root/.local/share/coursier/bin
-ENV JAVA_OPTS -Xms3g -Xmx4g
+ENV JAVA_OPTS -Xms16g -Xmx16g
 
 # specify the solver command
 ENTRYPOINT ["scala", "-cp", "/util-example-solver/lib/scop.jar:/util-example-solver/target/scala-2.12/coresolver_2.12-1.3.5.jar", "fun.scop.app.isr.IsrSolver"]
