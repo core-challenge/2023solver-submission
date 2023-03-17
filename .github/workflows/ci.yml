@@ -30,7 +30,7 @@ jobs:
           tags: ${{ github.repository }}:latest
       - name: Test container with simple dataset
         run: |
-          docker run --rm -t ${{ github.repository }}:latest -e JAVA_OPTS="-Xms3g -Xmx4g" -w ./container/test-instances:/tests tests/hc-power-11.col tests/hc-power-11_01.dat
+          docker run --rm -t ${{ github.repository }}:latest -w ./container/test-instances:/tests tests/hc-power-11.col tests/hc-power-11_01.dat
         env:
           MEM_LIMII_GB: 7
 
