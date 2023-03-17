@@ -32,7 +32,7 @@ jobs:
         run: |
           docker run --rm -t -w ${{ github.workspace }}/container/test-instances:/tests -e JAVA_OPTS="-Xms${MEM_LIMIT_GB}g -Xmx${MEM_LIMIT_GB}g" ${{ github.repository }}:latest tests/hc-power-11.col tests/hc-power-11_01.dat
         env:
-          MEM_LIMII_GB: 7
+          MEM_LIMIT_GB: 7
 
   test-description:
     runs-on: ubuntu-latest
