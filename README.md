@@ -1,59 +1,26 @@
 # README: Submission
 
-## Solver track
-
-### ToDo before Submission
+## ToDo before Submission
 
   1. Develop your solver
      - (Check) your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
 	   - (Check) your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
   2. Clone this repository [2023solver-submission](https://github.com/core-challenge/2023solver-submission) and edit it as your private repository. 
-  3. Create a solver executable on ubuntu 20.04 (as a Docker container)
-     - (Check) In your container, the following command returns the appropriate output.
-	 ```bash
-	 /2023solver/run.sh /2023solver/example/hc-toyno-01.col /2023solver/example/hc-toyno-01_01.dat
-	 /2023solver/run.sh /2023solver/example/hc-toyyes-01.col /2023solver/example/hc-toyyes-01_01.dat
-	 ```
+  3. Create a solver executable on ubuntu 20.04 as a Dockerfile.
   4. Write your solver description. 
-  5. Appropriately place i) your container archive and ii) your solver description into the your provate repository cloned from this repository. 
-    - (Check) "Github action" will run everytime you push. Please check your action stateus to check whether your products are applopriately placed or not. 
+  5. The final state of your Github private repository is:
+     - `container/Dockerfile` is edited and `docker build ./` will build your solver docker image.
+     - Using your docker image, `docker run --rm -it /solver-exe/run.sh input.col input.dat` will print result.
+     - `description/main.tex` can be compiled using `pdflatex`.
 
-### Check List before Submission
+## Dockerfile
 
-- [ ] your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
-- [ ] your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
-- [ ] In your container, does the following command returns the appropriate output?
-- [ ] Are "Github action" status all green?
-
-### ToDo at the Submission
-
-  1. please fill in and send your information through [this Google](https://forms.gle/CGYfrksJASwGUpWYA) Form](https://forms.gle/CGYfrksJASwGUpWYA).
-  2. submit your products as a private Github repository which contains
-    - a Docker file
-    - a solver description
-  3. Add TakehideSoh and tom-tan as members of your private repository. 
-
-
-<!-- - Please prepare the followings: -->
-<!--   - [Example output](https://core-challenge.github.io/2022/#output-file-format) and "GNU time" command log. -->
-<!--     - see detail [here](/solver/solver-track-instruction.md) -->
-<!--   - solver executable on ubuntu 20.04 (as Docker container) -->
-<!--     - see detail [here](/solver/solver-track-instruction.md) -->
-<!--   - solver Description (in tex format) -->
-<!--     - [example](/solver/doc/example.pdf). -->
-
-<!-- - Template/example is given in [solver](/solver/). -->
-
-<!-- - Submission should be done by the procedure described [here](https://core-challenge.github.io/2022/#for-solver-track). (clone this repository and add TakehideSoh in your private repository). -->
-
-## About solver (as a docker container)
-
-- Please submit your solver executable on Ubuntu 20.04 as a docker container archive (tar.gz archive).
-
-
-### Dockerfile and final product
-
-- The basic template is as follows.
+- You can find the official reference of Dockerfile [here](https://docs.docker.com/engine/reference/builder/).
+- What you need to do is
+  - prepare your solver and put all necessary files into YOUR-SOLVER-MATERIAL-IN-CONTAINER-DIR (any name you want).
+  - copy YOUR-SOLVER-MATERIAL-IN-CONTAINER-DIR into the `container` directory.
+  - edit `container/run.sh` so that your solver can run.
+  - edit the Dockerfile below so that your solver can run.
 
 ``` bash
 FROM ubuntu:20.04
@@ -71,15 +38,42 @@ RUN \
 #   apt install -y software-properties-common
 
 #------------------------------------------------
-# (2) clone the 2022solver directory to /
+# (2) install your solver
 #------------------------------------------------
-RUN git clone https://github.com/core-challenge/2022solver.git
+RUN \
+    mkdir solver-exe && \
+    cd solver-exe && \
+    COPY YOUR-SOLVER-MATERIAL-IN-CONTAINER-DIR . && \
+    ## .. put your solver install commands ..
+
+#------------------------------------------------
+# (3) construct your solver directory
+# before copying please edit run.sh so that the command
+#    ./run.sh input.col input.dat 
+# will run your solver and print results appropriately
+#------------------------------------------------
+RUN \
+    cd solver-exe && \
+    COPY run.sh .
 ```
 
-- It will create an almost empty Ubuntu OS which has the `/2022solver/` directory.
-- What you need to do is install your solver and rewrite `/2022solver/run.sh` so that `/2022solver/run.sh /2022solver/example/hc-toyno-01.col /2022solver/example/hc-toyno-01_01.dat` returns appropriate output.
-- There are several ways to do that. The following is an instruction.
+## Check List before Submission
 
+- [ ] your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
+- [ ] your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
+- [ ] In your container, does the following command returns the appropriate output?
+- [ ] Using your docker image, `docker run --rm -it /solver-exe/run.sh input.col input.dat` will print appropriate results?
+- [ ] Are "Github action" status all green?
+
+## ToDo at the Submission
+
+  1. please fill in and send your information through [this Google](https://forms.gle/CGYfrksJASwGUpWYA) Form](https://forms.gle/CGYfrksJASwGUpWYA).
+  2. submit your products as a private Github repository which contains
+    - a Docker file
+    - a solver description
+  3. Add TakehideSoh and tom-tan as members of your private repository. 
+
+<!-- 
 ### Instruction
 
 - At first, edit the above Dockerfile as you like (cloning 2022solver is mandatory).
@@ -164,5 +158,5 @@ $ docker export mysolver-container | gzip -c > mysolver-container.tar.gz
   - `docker ps -a`
   - `docker cp`
   - `docker exec`
-  - `docker export`
+  - `docker export` -->
 
