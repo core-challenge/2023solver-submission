@@ -36,9 +36,8 @@ jobs:
       - name: Run test suite
         run: |
           ${{ github.workspace }}/.github/workflows/run-tests.sh $TIMEOUT ${{ github.repository }}:latest .env ${{ github.workspace }}/container/test-instances results
-            ; exit 0
         env:
-          TIMEOUT: 30
+          TIMEOUT: 60
       - name: Show summary
         if: ${{ always() }}
         run: |

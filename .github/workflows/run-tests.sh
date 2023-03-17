@@ -61,7 +61,7 @@ done
 cat << EOS > $resultdir/result.md
 # Configuration
 - #Instances: $ntests
-- Time out: $to seconds
+- Timeout: $to seconds
 
 # Test results
 
@@ -70,8 +70,8 @@ cat << EOS > $resultdir/result.md
 $(cat $resultdir/tmp.md)
 
 Legends:
-- :white_check_mark:: The solver succeeded its execution and prints valid output
-- :no_entry:: The solver succeeded its execution but prints invalid output
+- :white_check_mark:: The solver succeeded its execution with valid output
+- :no_entry:: The solver succeeded its execution with invalid output
 - :hourglass_flowing_sand:: The solver failed its execution due to timeout
 - :collision:: The solver failed its execution for other reasons such as internal errors
 EOS
