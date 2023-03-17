@@ -37,7 +37,7 @@ jobs:
         run: |
           ${{ github.workspace }}/.github/workflows/run-tests.sh $TIMEOUT ${{ github.repository }}:latest .env ${{ github.workspace }}/container/test-instances results
         env:
-          TIMEOUT: 60
+          TIMEOUT: 30
       - name: Show summary
         if: ${{ always() }}
         run: |
