@@ -31,7 +31,7 @@ jobs:
       - name: Test container with simple dataset
         run: |
           docker run --rm -t ${{ github.repository }}:latest -e JAVA_OPTS="-Xms${MEM_LIMIT_GB}g -Xmx${MEM_LIMIT_GB}g" -w ./container/test-instances:/tests tests/hc-power-11.col tests/hc-power-11_01.dat
-        env: |
+        env:
           MEM_LIMII_GB: 7
 
   test-description:
