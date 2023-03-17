@@ -35,7 +35,13 @@ jobs:
           MEM_LIMIT_GB: 7 # memory limit for Github hosted runner
       - name: Test container with simple dataset
         run: |
-          docker run --rm -t -v ${{ github.workspace }}/container/test-instances:/tests --env-file .env ${{ github.repository }}:latest /tests/hc-power-11.col /tests/hc-power-11_01.dat
+          docker run --rm -t -v ${{ github.workspace }}/container/test-instances:/tests --env-file .env ${{ github.repository }}:latest /tests/hc-power-11.col /tests/hc-power-11_01.dat > hc-power-11-result.txt
+      - name: Set up validator
+        run: |
+          curl -fL https://raw.githubusercontent.com/core-challenge/isr-validator/main/main.py -o validator.py
+      - name: Validate result
+        run: |
+          python validator.py /tests/hc-power-11.col /tests/hc-power-11_01.dat hc-power-11-result.txt
 
   test-description:
     runs-on: ubuntu-latest
