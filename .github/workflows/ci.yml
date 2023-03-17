@@ -42,12 +42,18 @@ jobs:
       # - name: Validate result
       #   run: |
       #     python validator.py /tests/hc-power-11.col /tests/hc-power-11_01.dat hc-power-11-result.txt
+      - run: which timeout
       - name: Run test suite
         run: |
           ${{ github.workspace }}/.github/workflows/run-tests.sh $TIMEOUT solver:latest .env ${{ github.workspace }}/container/test-instances results
           cat results/ressult.md >> $GITHUB_STEP_SUMMARY
         env:
           TIMEOUT: 30
+      - uses: actions/upload-artifact@v3
+        if: ${{ failure() }}
+        with:
+          name: results
+          path: results
 
   test-description:
     runs-on: ubuntu-latest
