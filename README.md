@@ -52,10 +52,10 @@ RUN \
 #------------------------------------------------
 # (2) install your solver
 #------------------------------------------------
-RUN \
-    COPY YOUR-SOLVER-MATERIAL-DIR . && \
-    cd YOUR-SOLVER-MATERIAL-DIR && \
-    ## .. write your solver install commands ..
+COPY YOUR-SOLVER-MATERIAL-DIR /solver-dir
+WORKDIR /solver-dir
+
+## .. write your solver install commands ..
 
 # or if you can put all files into a PUBLIC repository
 # just clone it and compile it
@@ -68,7 +68,7 @@ RUN \
 # this command should accept 2 arguments *.col and *.dat
 #------------------------------------------------
 
-ENTRYPOINT ["YOUR-SOLVER-MATERIAL-DIR/solver-executable", "OPTION"]
+ENTRYPOINT ["/solver-dir/solver-executable", "OPTION"]
 ```
 
 ### Example
