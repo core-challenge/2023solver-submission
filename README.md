@@ -6,21 +6,29 @@
      - (Check) your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
      - (Check) your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
   2. Clone this repository [2023solver-submission](https://github.com/core-challenge/2023solver-submission) and edit it as your private repository. 
-  3. Create a solver executable on ubuntu 20.04 as a Dockerfile.
-  4. Write your solver description. 
+  3. Create a solver executable on ubuntu 20.04 as a Dockerfile (see below and [sample file](/container/Dockerfile)).
+  4. Write your solver description as [main.tex](/description/main.tex). 
   5. The final state of your Github private repository is:
-     - `container/Dockerfile` is edited and `docker build ./` will build your solver docker image.
-     - Using your docker image, `docker run --rm -it /solver-exe/run.sh input.col input.dat` will print result.
-     - `description/main.tex` can be compiled using `pdflatex`.
+     - `container/Dockerfile` is edited and `container $ docker build -f Dockerfile -t solver-name .` will build your solver docker image.
+     - Using your docker image, `docker run --rm -t -v LOCAL-HOST-TEST-DIR:/test solver-name /test/test.col /test/test.dat` will print result.
+       - Note: LOCAL-HOST-TEST-DIR must be an absolute path on your local machine containing test.col and test.dat.
+     - `description/main.tex` can be compiled using `latexmk` (see more detail on [latex-action](https://github.com/xu-cheng/latex-action)).
 
-## Dockerfile
+## How to write your Dockerfile
+
+### For Docker experts
+
+The only requirement is to describe your solver command as ENTRYPOINT which accepts 2 arguments *.col and *.dat.
+
+### For others
 
 - You can find the official reference of Dockerfile [here](https://docs.docker.com/engine/reference/builder/).
-- What you need to do is
-  - prepare your solver and put all necessary files into YOUR-SOLVER-MATERIAL-IN-CONTAINER-DIR (any name you want).
-  - copy YOUR-SOLVER-MATERIAL-IN-CONTAINER-DIR into the `container` directory.
-  - edit `container/run.sh` so that your solver can run.
-  - edit the Dockerfile below so that your solver can run.
+- What you need to do is 
+  - (local machine) prepare your solver and put all necessary files into YOUR-SOLVER-MATERIAL-DIR (any name you want).
+  - (local machine) copy YOUR-SOLVER-MATERIAL-DIR into the `container` directory of your private repository.
+  - (local machine) edit the Dockerfile below so that your solver can run.
+- Or, if you can put all files into a PUBLIC repository, just clone it and compile it in Dockerfile. You do not need to copy local files. 
+
 
 ``` bash
 FROM ubuntu:20.04
@@ -31,9 +39,10 @@ FROM ubuntu:20.04
 RUN \
     apt update && \
     apt -y upgrade && \
-    apt install -y curl git man unzip vim wget sudo
+    apt install -y curl git man unzip vim wget sudo # if you need any
 
 #   Hint: you may want to additionally install the followings. 
+# 
 #   apt install -y build-essential
 #   apt install -y software-properties-common
 
@@ -41,21 +50,30 @@ RUN \
 # (2) install your solver
 #------------------------------------------------
 RUN \
-    mkdir solver-exe && \
-    cd solver-exe && \
-    COPY YOUR-SOLVER-MATERIAL-IN-CONTAINER-DIR . && \
-    ## .. put your solver install commands ..
+    COPY YOUR-SOLVER-MATERIAL-DIR . && \
+    cd YOUR-SOLVER-MATERIAL-DIR && \
+    ## .. write your solver install commands ..
+
+# or if you can put all files into a PUBLIC repository
+# just clone it and compile it
+#
+# git clone your-solver-repository
+# ... write your solver install commands ...
 
 #------------------------------------------------
-# (3) construct your solver directory
-# before copying please edit run.sh so that the command
-#    ./run.sh input.col input.dat 
-# will run your solver and print results appropriately
+# (3) write your solver execution command as ENTRYPOINT
+# this command should accept 2 arguments *.col and *.dat
 #------------------------------------------------
-RUN \
-    cd solver-exe && \
-    COPY run.sh .
+
+ENTRYPOINT ["YOUR-SOLVER-MATERIAL-DIR/solver-executable", "OPTION"]
 ```
+
+### Example
+
+- See [Dockerfile](/container/Dockerfile) of this repository which launches [an example solver](https://github.com/core-challenge/util-example-solver). 
+- Since this solver is available in a public repository, we do not need a copy of local files (just clone). 
+- And, since this solver runs on JVM, we do not need to compile it in Docker file. 
+
 
 ## Check List before Submission
 
