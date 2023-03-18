@@ -1,7 +1,6 @@
 # README: Submission
 
 
-
 ## ToDo before Submission
 
   1. Develop your solver
@@ -11,7 +10,7 @@
   3. Create a solver executable on ubuntu 20.04 as a Dockerfile (see below and [sample file](/container/Dockerfile)).
   4. Write your solver description as [main.tex](/description/main.tex). 
   5. The final state of your Github private repository is:
-     - `container/Dockerfile` is edited and `[at container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image.
+     - `container/Dockerfile` is edited and `[container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image.
      - Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver-name /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print a result.
        - Note: LOCAL-HOST-TEST-DIR must be an absolute path on your local machine containing test.col and test.dat.
      - `description/main.tex` can be compiled using `latexmk` (see more detail on [latex-action](https://github.com/xu-cheng/latex-action)).
@@ -83,17 +82,17 @@ ENTRYPOINT ["YOUR-SOLVER-MATERIAL-DIR/solver-executable", "OPTION"]
 
 - [ ] your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
 - [ ] your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
-- [ ] In your container, does the following command returns the appropriate output?
+- [ ] In your container `[at container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image?
 - [ ] Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver2 /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print appropriate results?
-- [ ] Are "Github action" status all green?
+- [ ] Are "Github action" status of your private repository all green?
 
 ## ToDo at the Submission
 
   1. please fill in and send your information through [this Google form](https://forms.gle/CGYfrksJASwGUpWYA).
-  2. submit your products as a private Github repository which contains
+  2. submit your products as a private Github repository which contains: 
     - a Docker file
     - a solver description
-  3. Add TakehideSoh and tom-tan as members of your private repository. 
+  3. Add `TakehideSoh` and `tom-tan` as members of your private repository. 
 
 <!-- 
 ### Instruction
