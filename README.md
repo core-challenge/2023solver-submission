@@ -89,10 +89,7 @@ ENTRYPOINT ["YOUR-SOLVER-MATERIAL-DIR/solver-executable", "OPTION"]
 ## ToDo at the Submission
 
   1. please fill in and send your information through [this Google form](https://forms.gle/CGYfrksJASwGUpWYA).
-  2. submit your products as a private Github repository which contains: 
-    - a Docker file
-    - a solver description
-  3. Add `TakehideSoh` and `tom-tan` as members of your private repository. 
+  2. submit your private Github repository by adding `TakehideSoh` and `tom-tan` as members.
 
 <!-- 
 ### Instruction
