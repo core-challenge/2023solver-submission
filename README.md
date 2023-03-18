@@ -12,7 +12,7 @@
   5. The final state of your Github private repository is:
      - `container/Dockerfile` is edited and `[container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image.
      - Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver-name /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print a result.
-       - Note: LOCAL-HOST-TEST-DIR must be an absolute path on your local machine containing test.col and test.dat.
+       - Note: ABSOLUTEPATH must be the absolute path where the cloned repository downloaded.
      - `description/main.tex` can be compiled using `latexmk` (see more detail on [latex-action](https://github.com/xu-cheng/latex-action)).
   6. Everytime you push, [GitHub Actions](https://github.com/core-challenge/2023solver-submission/actions) tell you whether your files are fine or not. Please make the status all green before your submission (if you know there are some test instances cannot solve then it is okay).
 
