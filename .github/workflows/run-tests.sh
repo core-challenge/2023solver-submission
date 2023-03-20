@@ -1,15 +1,16 @@
 #!/bin/bash
 
-if [ $# -ne 5 ]; then
-    echo "Usage: $0 timeout solver-image env-file testdir resultdir"
+if [ $# -ne 6 ]; then
+    echo "Usage: $0 timeout solver-image env-file testdir resultdir extra-args"
     exit 0
 fi
 
 to=$1
 img=$2
 env=$3
-testdir=$4
+testdir=$(readlink -f $4)
 resultdir=$5
+extra=$6
 
 mkdir -p $resultdir
 
@@ -28,7 +29,7 @@ efailed=0
 for t in ${tests[@]}
 do
     timeout 30 \
-        docker run --rm -t -v $testdir:/tests --env-file $env $img /tests/${t}.col /tests/${t}_01.dat &> $resultdir/${t}-result.txt \
+        docker run --rm -t -v $testdir:/tests --env-file $env $img $extra /tests/${t}.col /tests/${t}_01.dat &> $resultdir/${t}-result.txt \
         ; echo $? > $resultdir/${t}-code
     code=$(cat $resultdir/${t}-code)
     if [ "$code" -eq 0 ]; then
