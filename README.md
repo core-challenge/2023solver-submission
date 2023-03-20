@@ -89,7 +89,7 @@ ENTRYPOINT ["/solver-dir/solver-executable", "OPTION"]
 ## Launching Options
 
 - If there are additional launch options besides the two input files, such as specifying memory 　size or switching shortest/extent/longest solvers, please describe them in the [launchingOptions.csv](/container/launchOptions.csv) file (use them sparingly and try to include them in the ENTRYPOINT as much as possible).
-- In that case, please describe the two input files as `COLFILE` and `DATFILE` and the Maximum memory (we expect around 28GB out of 32GB) as `MAX_MEMORY_SIZE`.
+- In that case, please describe the two input files as `COLFILE` and `DATFILE` and the Maximum memory (we expect around 56GB out of 64GB) as `MAX_MEMORY_SIZE`.
 - An example is as follows. The 1st column is reserved.
 
 ```
