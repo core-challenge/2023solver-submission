@@ -14,9 +14,10 @@
      - Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver-name /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print a result.
        - Note: ABSOLUTEPATH must be the absolute path where the cloned repository downloaded.
      - `description/main.tex` can be compiled using `latexmk` (You can check the compiled PDF via the `Description` in the `Artifacts` as shown below).
+
        ![Description](figs/artifacts.png)
   6. Everytime you push, [GitHub Actions](https://github.com/core-challenge/2023solver-submission/actions) tell you whether your files are fine or not as shown below. Please make the status all green before your submission (it is okay when some instances cannot be solved due to timeout). You can get the logs for all the instances via the `results` in the `Artifact`.
-    ![Description](figs/test-results.png)
+  ![Description](figs/test-results.png)
 
 ## How to write your Dockerfile
 
