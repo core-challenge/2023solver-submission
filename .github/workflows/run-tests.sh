@@ -21,7 +21,6 @@ if [ ! -e validator.py ]; then
 fi
 
 ntests=${#tests[@]}
-nfailed=0
 tfailed=0
 vfailed=0
 efailed=0
@@ -42,18 +41,15 @@ do
         else
             echo "${t}: validation failed"
             echo "| ${t} | :no_entry: |" >> $resultdir/tmp.md
-            ((nfailed++))
             ((vfailed++))
         fi
     elif [ "$code" -eq 124 ]; then
         echo "${t}: timeout"
         echo "| ${t} | :hourglass_flowing_sand: |" >> $resultdir/tmp.md
-        ((nfailed++))
         ((tfailed++))
     else
         echo "${t}: execution failed"
         echo "| ${t} | :collision: |" >> $resultdir/tmp.md
-        ((nfailed++))
         ((efailed++))
     fi
 done
@@ -78,6 +74,6 @@ EOS
 
 rm -f $resultdir/tmp.md
 
-echo "$((ntests-nfailed))/${ntests} passed"
+echo "$((ntests-vfailed-tfailed-efailed))/${ntests} passed"
 
-exit $nfailed
+exit $((vfailed+efailed))
