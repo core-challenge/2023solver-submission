@@ -85,7 +85,7 @@ ENTRYPOINT ["/solver-dir/solver-executable", "OPTION"]
 
 - [ ] your solver can accept [the input file format](https://core-challenge.github.io/2023/format/)?
 - [ ] your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
-- [ ] In your container `[at container/]$ docker build -f Dockerfile -t solver-name.` will build your solver docker image?
+- [ ] In your container `[at container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image?
 - [ ] Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver2 /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print appropriate results?
 - [ ] Does "Github action" status of your private repository only include green (:white_check_mark:) or timeout (:hourglass_flowing_sand:)?
 
