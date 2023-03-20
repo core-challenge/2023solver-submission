@@ -86,6 +86,20 @@ ENTRYPOINT ["/solver-dir/solver-executable", "OPTION"]
 - [ ] Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver2 /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print appropriate results?
 - [ ] Are "Github action" status of your private repository all green?
 
+## Launching Options
+
+- If there are additional launch options besides the two input files, such as specifying memory 　size or switching shortest/extent/longest solvers, please describe them in the [launchingOptions.csv](/container/launchOptions.csv) file (use them sparingly and try to include them in the ENTRYPOINT as much as possible).
+- In that case, please describe the two input files as `COLFILE` and `DATFILE` and the Maximum memory (we expect around 28GB out of 32GB) as `MAX_MEMORY_SIZE`.
+- An example is as follows. The 1st column is reserved.
+
+```
+shortest,--shortest,COLFILE,DATFILE
+existent,--existent,--momory-size=MAX_MEMORY_SIZE,COLFILE,DATFILE
+longest,--longest,COLFILE,DATFILE
+```
+
+- If you do not need extra launch options, we use only `COLFILE` and `DATFILE` when we execute it. 
+
 ## ToDo at the Submission
 
   1. please fill in and send your information through [this Google form](https://forms.gle/CGYfrksJASwGUpWYA).
