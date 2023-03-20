@@ -91,8 +91,10 @@ ENTRYPOINT ["/solver-dir/solver-executable", "OPTION"]
 
 ## Launching Options
 
-- If there are additional launch options besides the two input files, such as specifying memory 　size or switching shortest/extent/longest solvers, please describe them in the [launchingOptions.csv](/container/launchOptions.csv) file (use them sparingly and try to include them in the ENTRYPOINT as much as possible).
-- In that case, please describe the two input files as `COLFILE` and `DATFILE` and the Maximum memory (we expect around 28GB out of 32GB) as `MAX_MEMORY_SIZE`.
+- We execute your solver only with two input files by default (i.e., `your-solver input.col input.dat`).
+- If there are additional options besides the two input files, such as specifying memory size or switching shortest/extent/longest solvers, please describe them in the [launchingOptions.csv](/container/launchOptions.csv) file.
+  - Please describe the two input files as `COLFILE` and `DATFILE` and the Maximum memory (we expect around 28GB out of 32GB) as `MAX_MEMORY_SIZE`.
+  - Note that such additional options must not be included in the `ENTRYPOINT` instruction in the `Dockerfile`.
 - An example is as follows. The 1st column is reserved.
 
 ```
@@ -101,7 +103,6 @@ existent,--existent,--momory-size=MAX_MEMORY_SIZE,COLFILE,DATFILE
 longest,--longest,COLFILE,DATFILE
 ```
 
-- If you do not need extra launch options, we use only `COLFILE` and `DATFILE` when we execute it. 
 
 ## ToDo at the Submission
 
