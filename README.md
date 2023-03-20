@@ -13,8 +13,10 @@
      - `container/Dockerfile` is edited and `[container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image.
      - Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver-name /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print a result.
        - Note: ABSOLUTEPATH must be the absolute path where the cloned repository downloaded.
-     - `description/main.tex` can be compiled using `latexmk` (see more detail on [latex-action](https://github.com/xu-cheng/latex-action)).
-  6. Everytime you push, [GitHub Actions](https://github.com/core-challenge/2023solver-submission/actions) tell you whether your files are fine or not. Please make the status all green before your submission (if you know there are some test instances cannot solve then it is okay).
+     - `description/main.tex` can be compiled using `latexmk` (You can check the compiled PDF via the `Description` in the `Artifacts` as shown below).
+       ![Description](figs/artifacts.png)
+  6. Everytime you push, [GitHub Actions](https://github.com/core-challenge/2023solver-submission/actions) tell you whether your files are fine or not as shown below. Please make the status all green before your submission (it is okay when some instances cannot be solved due to timeout). You can get the logs for all the instances via the `results` in the `Artifact`.
+    ![Description](figs/test-results.png)
 
 ## How to write your Dockerfile
 
@@ -84,7 +86,7 @@ ENTRYPOINT ["/solver-dir/solver-executable", "OPTION"]
 - [ ] your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
 - [ ] In your container `[at container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image?
 - [ ] Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver2 /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print appropriate results?
-- [ ] Are "Github action" status of your private repository all green?
+- [ ] Does "Github action" status of your private repository only include green (:white_check_mark:) or timeout (:hourglass_flowing_sand:)?
 
 ## Launching Options
 
