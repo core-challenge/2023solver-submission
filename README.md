@@ -13,23 +13,27 @@
      - `container/Dockerfile` is edited and `[container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image.
      - Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver-name /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print a result.
        - Note: ABSOLUTEPATH must be the absolute path where the cloned repository downloaded.
-     - `description/main.tex` can be compiled using `latexmk` (see more detail on [latex-action](https://github.com/xu-cheng/latex-action)).
-  6. Everytime you push, [GitHub Actions](https://github.com/core-challenge/2023solver-submission/actions) tell you whether your files are fine or not. Please make the status all green before your submission (if you know there are some test instances cannot solve then it is okay).
+     - `description/main.tex` can be compiled using `latexmk` (You can check the compiled PDF via the `Description` in the `Artifacts` as shown below).
+
+       ![Description](figs/artifacts.png)
+  6. Everytime you push, [GitHub Actions](https://github.com/core-challenge/2023solver-submission/actions) tell you whether your files are fine or not as shown below. Please make the status all green before your submission (it is okay when some instances cannot be solved due to timeout). You can get the logs for all the instances via the `results` in the `Artifact`.
+  ![Description](figs/test-results.png)
 
 ## How to write your Dockerfile
 
 ### For Docker experts
 
-- The only requirement is to describe your solver command as [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint) which accepts 2 arguments `*.col` and `*.dat` when we execute it.
+- The only requirement is to describe your solver command as [ENTRYPOINT](https://docs.docker.com/engine/reference/builder/#entrypoint) which accepts 2 arguments `*.col` and `*.dat` when we execute it. Please use `ubuntu:20.04`.
 - [Sample file](/container/Dockerfile) is one satisfying this requirement.
 
 ### For others
 
-- You can find the official reference of Dockerfile [here](https://docs.docker.com/engine/reference/builder/).
+- You can find the official reference of Dockerfile [here](https://docs.docker.com/engine/reference/builder/). 
 - What you need to do is 
   - (local machine) prepare your solver and put all necessary files into YOUR-SOLVER-MATERIAL-DIR (any name you want).
   - (local machine) copy YOUR-SOLVER-MATERIAL-DIR into the `container` directory of your private repository.
   - (local machine) edit the Dockerfile below so that your solver can run.
+  - Please use `ubuntu:20.04`.
 - Or, if you can put all files into a PUBLIC repository, just clone it and compile it in Dockerfile. You do not need to copy local files. 
 
 
@@ -84,12 +88,14 @@ ENTRYPOINT ["/solver-dir/solver-executable", "OPTION"]
 - [ ] your solver can print [the output format](https://core-challenge.github.io/2023/format/) to standard out?
 - [ ] In your container `[at container/]$ docker build -f Dockerfile -t solver-name .` will build your solver docker image?
 - [ ] Using your docker image, `docker run --rm -t -v /ABSOLUTEPATH/2023solver-submission/container/test-instances:/test solver2 /test/hc-toyyes-01.col /test/hc-toyyes-01_01.dat` will print appropriate results?
-- [ ] Are "Github action" status of your private repository all green?
+- [ ] Does "Github action" status of your private repository only include green (:white_check_mark:) or timeout (:hourglass_flowing_sand:)?
 
 ## Launching Options
 
-- If there are additional launch options besides the two input files, such as specifying memory 　size or switching shortest/extent/longest solvers, please describe them in the [launchingOptions.csv](/container/launchOptions.csv) file (use them sparingly and try to include them in the ENTRYPOINT as much as possible).
-- In that case, please describe the two input files as `COLFILE` and `DATFILE` and the Maximum memory (we expect around 56GB out of 64GB) as `MAX_MEMORY_SIZE`.
+- We execute your solver only with two input files by default (i.e., `your-solver input.col input.dat`).
+- If there are additional options besides the two input files, such as specifying memory size or switching shortest/extent/longest solvers, please describe them in the [launchingOptions.csv](/container/launchOptions.csv) file.
+  - Please describe the two input files as `COLFILE` and `DATFILE` and the Maximum memory (we expect around 28GB out of 32GB) as `MAX_MEMORY_SIZE`.
+  - Note that such additional options must not be included in the `ENTRYPOINT` instruction in the `Dockerfile`.
 - An example is as follows. The 1st column is reserved.
 
 ```
@@ -98,7 +104,6 @@ existent,--existent,--momory-size=MAX_MEMORY_SIZE,COLFILE,DATFILE
 longest,--longest,COLFILE,DATFILE
 ```
 
-- If you do not need extra launch options, we use only `COLFILE` and `DATFILE` when we execute it. 
 
 ## ToDo at the Submission
 
