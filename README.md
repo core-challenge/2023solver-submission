@@ -105,6 +105,30 @@ longest,--longest,COLFILE,DATFILE
 ```
 
 
+### Multiple Solvers for One Metric
+
+If you have multiple solvers for one metric please add indices to the 1st column.
+
+```
+shortest1,--shortest,specific_option1,COLFILE,DATFILE
+shortest2,--shortest,specific_option2,COLFILE,DATFILE
+```
+
+### If your solver is a single-engine solver
+
+We are encouraging participants to develop single-engine solvers 
+(not using "parallel portfolios" and "sequential portfolios").
+If your solver is a single-engine solver, 
+please add a comment following `#` to the CSV file.
+
+```
+# shortest1 is a single-engine solver. 
+shortest1,--shortest,specific_option1,COLFILE,DATFILE
+shortest2,--shortest,specific_option2,COLFILE,DATFILE
+```
+
+
+
 ## ToDo at the Submission
 
   1. please fill in and send your information through [this Google form](https://forms.gle/CGYfrksJASwGUpWYA).
