@@ -1,15 +1,16 @@
 #!/bin/bash
 
-if [ $# -ne 5 ]; then
-    echo "Usage: $0 timeout solver-image env-file testdir resultdir"
+if [ $# -ne 6 ]; then
+    echo "Usage: $0 timeout solver-image env-file testdir resultdir extra-args"
     exit 0
 fi
 
 to=$1
 img=$2
 env=$3
-testdir=$4
+testdir=$(readlink -f $4)
 resultdir=$5
+extra=$6
 
 mkdir -p $resultdir
 
@@ -21,7 +22,6 @@ if [ ! -e validator.py ]; then
 fi
 
 ntests=${#tests[@]}
-nfailed=0
 tfailed=0
 vfailed=0
 efailed=0
@@ -29,7 +29,7 @@ efailed=0
 for t in ${tests[@]}
 do
     timeout 30 \
-        docker run --rm -t -v $testdir:/tests --env-file $env $img /tests/${t}.col /tests/${t}_01.dat &> $resultdir/${t}-result.txt \
+        docker run --rm -t -v $testdir:/tests --env-file $env $img $extra /tests/${t}.col /tests/${t}_01.dat &> $resultdir/${t}-result.txt \
         ; echo $? > $resultdir/${t}-code
     code=$(cat $resultdir/${t}-code)
     if [ "$code" -eq 0 ]; then
@@ -42,18 +42,15 @@ do
         else
             echo "${t}: validation failed"
             echo "| ${t} | :no_entry: |" >> $resultdir/tmp.md
-            ((nfailed++))
             ((vfailed++))
         fi
     elif [ "$code" -eq 124 ]; then
         echo "${t}: timeout"
         echo "| ${t} | :hourglass_flowing_sand: |" >> $resultdir/tmp.md
-        ((nfailed++))
         ((tfailed++))
     else
         echo "${t}: execution failed"
         echo "| ${t} | :collision: |" >> $resultdir/tmp.md
-        ((nfailed++))
         ((efailed++))
     fi
 done
@@ -78,6 +75,6 @@ EOS
 
 rm -f $resultdir/tmp.md
 
-echo "$((ntests-nfailed))/${ntests} passed"
+echo "$((ntests-vfailed-tfailed-efailed))/${ntests} passed"
 
-exit $nfailed
+exit $((vfailed+efailed))
