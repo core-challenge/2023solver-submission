@@ -28,7 +28,7 @@ efailed=0
 
 for t in ${tests[@]}
 do
-    timeout 30 \
+    timeout $to \
         docker run --rm -t -v $testdir:/tests --env-file $env $img $extra /tests/${t}.col /tests/${t}_01.dat &> $resultdir/${t}-result.txt \
         ; echo $? > $resultdir/${t}-code
     code=$(cat $resultdir/${t}-code)
